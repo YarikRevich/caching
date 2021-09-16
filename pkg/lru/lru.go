@@ -1,9 +1,9 @@
-package logic
+package lru
 
 import (
 	"container/list"
 
-	"github.com/YarikRevich/lru/internal/interfaces"
+	"github.com/YarikRevich/lru/pkg/interfaces"
 )
 
 type LRU struct {

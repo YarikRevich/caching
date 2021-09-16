@@ -5,8 +5,8 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/YarikRevich/lru/internal/interfaces"
-	"github.com/YarikRevich/lru/internal/logic"
+	"github.com/YarikRevich/lru/pkg/interfaces"
+	"github.com/YarikRevich/lru/pkg/lru"
 
 	. "github.com/franela/goblin"
 )
@@ -19,7 +19,7 @@ func TestLru(t *testing.T) {
 		const Value = "test"
 		const Capacity = 10
 
-		l := logic.New(Capacity)
+		l := lru.New(Capacity)
 
 		g.It("Should return true", func() {
 
