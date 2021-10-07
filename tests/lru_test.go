@@ -2,6 +2,7 @@ package lru_test
 
 import (
 	"crypto/rand"
+	"fmt"
 	"math/big"
 	"testing"
 
@@ -17,7 +18,7 @@ func TestLru(t *testing.T) {
 	g.Describe("Test lru cache", func() {
 		const Key = "test"
 		const Value = "test"
-		const Capacity = 10
+		const Capacity = 1
 
 		l := lru.New(Capacity)
 
@@ -28,7 +29,7 @@ func TestLru(t *testing.T) {
 			g.Assert(l.Get(Key)).Equal(Value)
 		})
 
-		g.It("Should have only 10 elements", func() {
+		g.It(fmt.Sprintf("Should have %d elements", Capacity), func() {
 			for i := 0; i <= 20; i++ {
 				randInt, err := rand.Int(rand.Reader, big.NewInt(1000))
 				if err != nil {
@@ -36,7 +37,22 @@ func TestLru(t *testing.T) {
 				}
 				l.Set(interfaces.Cell{Key: randInt.String(), Value: randInt.String()})
 			}
-			g.Assert(l.Len()).Equal(10)
+			g.Assert(l.Len()).Equal(Capacity)
 		})
+
+		g.It("Should have 0 elements", func() {
+			for i := 0; i <= 20; i++ {
+				randInt, err := rand.Int(rand.Reader, big.NewInt(1000))
+				if err != nil {
+					panic(err)
+				}
+				l.Set(interfaces.Cell{Key: randInt.String(), Value: randInt.String()})
+				l.Get(randInt.String())
+			}
+			g.Assert(l.Len()).Equal(0)
+		})
+
+
+
 	})
 }
