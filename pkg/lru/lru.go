@@ -4,7 +4,7 @@ import "container/list"
 
 type lru struct {
 	list.List
-	capacity int //maximum capacity of lru
+	capacity int
 }
 
 func (l *lru) Get(k interface{}) interface{} {
@@ -30,8 +30,5 @@ func (l *lru) QueueLen() int{
 }
 
 func New(capacity int) ILRU {
-	return &lru{
-		capacity: capacity,
-	}
-
+	return &lru{capacity: capacity}
 }

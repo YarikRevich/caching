@@ -16,6 +16,19 @@ func TestLru(t *testing.T) {
 
 		z := New(capacity)
 
+		g.It("Checks work of clean method", func(){
+			r, err := rand.Int(rand.Reader, big.NewInt(1000))
+			g.Assert(err).IsNil()
+
+			z.Add(r)
+
+			g.Assert(len(z.Get())).Eql(1)
+
+			z.Clean()
+
+			g.Assert(len(z.Get())).Eql(0)
+		})
+
 		g.AfterEach(func() {
 			z.Clean()
 		})

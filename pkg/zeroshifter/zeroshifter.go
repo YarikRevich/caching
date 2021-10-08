@@ -44,30 +44,3 @@ func New(capacity int) IZeroShifter {
 		capacity: capacity,
 	}
 }
-
-// if l.list.Len() == 1 {
-// 	f := l.list.Front()
-// 	if f != nil {
-
-// 		x, ok := f.Value.(interfaces.Cell)
-// 		if !ok {
-// 			return nil
-// 		}
-
-// 		if x.Key == k {
-// 			l.list.Remove(f)
-// 			return x.Value
-// 		}
-// 	}
-// }
-
-// func (l LRU) GetAllWithoutShift() []interface{} {
-// 	if l.Len() != 0 {
-// 		r := make([]interface{}, l.Len()-1)
-// 		for f := l.list.Front(); f != nil; f = f.Next() {
-// 			r = append(r, f.Value.(interfaces.Cell).Value)
-// 		}
-// 		return r
-// 	}
-// 	return nil
-// }
