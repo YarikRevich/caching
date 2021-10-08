@@ -82,9 +82,11 @@ func TestLru(t *testing.T) {
 
 			g.Assert(len(z.Get())).Eql(3)
 
-			g.Assert(z.IsExist(func(i interface{}) bool {
+			r, ok := z.IsExist(func(i interface{}) bool {
 				return i.(string) == "Error"
-			})).IsTrue()
+			})
+			g.Assert(ok).IsTrue()
+			g.Assert(r.(string)).Equal("Error")
 		})
 	})
 

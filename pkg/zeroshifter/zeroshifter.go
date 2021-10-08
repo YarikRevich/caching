@@ -38,16 +38,20 @@ func (z *zeroshifter) Clean() {
 	z.ring = ring.New(z.capacity)
 }
 
-func (z *zeroshifter) IsExist(c func(i interface{})bool)bool{
-	var r bool
+func (z *zeroshifter) IsExist(c func(i interface{}) bool) (interface{}, bool) {
+	var (
+		ok bool
+		r  interface{}
+	)
 	z.ring.Do(func(i interface{}) {
-		if i != nil{
-			if c(i){
-				r = true
+		if i != nil {
+			if c(i) {
+				ok = true
+				r = i
 			}
 		}
 	})
-	return r
+	return r, ok
 }
 
 func New(capacity int) IZeroShifter {
