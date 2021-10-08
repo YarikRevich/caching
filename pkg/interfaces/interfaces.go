@@ -8,12 +8,16 @@ type Cell struct {
 }
 
 type ILRU interface {
-	//Gets cell by the key
+	//Returns value gotten by the key shifting 
+	//other elements
 	Get(k interface{}) interface{} 
 
-	//Sets cell
+	//Returns the list of all values, but
+	//does not shift
+	GetAllWithoutShift() []interface{} 
+
 	Set(v Cell)
 
-	//Returns the len of the container/list
+	//Returns the len of the queue
 	Len() int
 }

@@ -12,33 +12,41 @@ type LRU struct {
 }
 
 func (l LRU) Get(k interface{}) interface{} {
-	if l.list.Len() > 1{
-	for f := l.list.Front(); f != nil; f = f.Next() {
-		if x := f.Value.(interfaces.Cell); x.Key == k {
-			l.list.MoveToFront(f)
-			return x.Value
+	if l.list.Len() > 1 {
+		for f := l.list.Front(); f != nil; f = f.Next() {
+			if x := f.Value.(interfaces.Cell); x.Key == k {
+				l.list.MoveToFront(f)
+				return x.Value
+			}
 		}
 	}
-} 
 
-	if l.list.Len() == 1{
+	if l.list.Len() == 1 {
 		f := l.list.Front()
-		if f != nil{
-			
+		if f != nil {
+
 			x, ok := f.Value.(interfaces.Cell)
-			if !ok{
-			return nil}
+			if !ok {
+				return nil
+			}
 
-			if x.Key == k{
-		l.list.Remove(f)
-		return x.Value
-	}
-	}
-		
+			if x.Key == k {
+				l.list.Remove(f)
+				return x.Value
+			}
+		}
+
 	}
 
-	
 	return nil
+}
+
+func (l LRU) GetAllWithoutShift()[]interface{}{
+	r := make([]interface{}, l.Len()-1)
+	for f := l.list.Front(); f != nil; f = f.Next(){
+		r = append(r, f.Value.(interfaces.Cell).Value)
+	}
+	return r
 }
 
 func (l LRU) Set(v interfaces.Cell) {

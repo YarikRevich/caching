@@ -53,6 +53,17 @@ func TestLru(t *testing.T) {
 		})
 
 
-
+		g.It("Shouldn't remove elements", func() {
+			for i := 0; i <= 20; i++ {
+				randInt, err := rand.Int(rand.Reader, big.NewInt(1000))
+				if err != nil {
+					panic(err)
+				}
+				l.Set(interfaces.Cell{Key: randInt.String(), Value: randInt.String()})
+			
+			}
+			g.Assert(len(l.GetAllWithoutShift())).Equal(Capacity)
+			g.Assert(l.Len()).Equal(Capacity)
+		})
 	})
 }
