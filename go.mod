@@ -1,4 +1,4 @@
-module github.com/YarikRevich/lru
+module github.com/YarikRevich/caching
 
 go 1.16
 
