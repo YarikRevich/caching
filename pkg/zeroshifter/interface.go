@@ -7,7 +7,9 @@ type IZeroShifter interface {
 
 	Get() []interface{} 
 
-	Filter(f func(i interface{})bool)
+	Filter(func(interface{})bool)
+
+	IsExist(func(interface{})bool)bool
 
 	Clean()
 }

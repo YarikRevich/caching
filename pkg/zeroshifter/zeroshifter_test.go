@@ -74,6 +74,18 @@ func TestLru(t *testing.T) {
 			z.Add("Debug")
 			g.Assert(len(z.Get())).Eql(3)
 		})
+
+		g.It("Check IsExist method", func(){
+			for _, v := range []string{"Error", "Warning", "Debug"}{
+				z.Add(v)
+			}
+
+			g.Assert(len(z.Get())).Eql(3)
+
+			g.Assert(z.IsExist(func(i interface{}) bool {
+				return i.(string) == "Error"
+			})).IsTrue()
+		})
 	})
 
 }
